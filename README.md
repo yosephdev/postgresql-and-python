@@ -1,39 +1,61 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# SQLAlchemy CRUD Operations
 
-Welcome,
+This project demonstrates how to perform CRUD (Create, Read, Update, Delete) operations using SQLAlchemy's Object-Relational Mapping (ORM) with a PostgreSQL database.
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Prerequisites
+- Python 3.x
+- PostgreSQL database
+- SQLAlchemy library
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
+## Getting Started
 
-## Codeanywhere Reminders
+### Create the Database Connection:
+- The code creates a database engine using `create_engine()` and connects to the "chinook" database.
+- The `declarative_base()` function is used to create a base class for the ORM models.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+### Define the ORM Models:
+- The `Programmer` class is defined as an ORM model, representing the "Programmer" table in the database.
+- The table name is specified using the `__tablename__` attribute, and the column definitions are made using `Column` objects.
 
-`python3 -m http.server`
+### Perform CRUD Operations:
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+#### Create:
+- New programmer records are created and added to the session.
+- The changes are committed to the database using `session.commit()`.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+#### Read:
+- Queries are executed using the `session.query()` method to retrieve data from the "Programmer" table.
+- The results are printed to the console.
 
-`http_server`
+#### Update:
+- A single record is updated by modifying the `famous_for` attribute.
+- Multiple records are updated by changing the `gender` attribute based on the existing value.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+#### Delete:
+- A single record is deleted by prompting the user for the first and last name, and then deleting the corresponding record.
+- All records can be deleted by iterating through the `Programmer` objects and deleting them one by one.
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Error Handling:
+- The code handles the case where the "Gender not defined" message is printed when updating the gender attribute.
+- The issue is related to the case-sensitivity of the gender variable, and the solution is to ensure that the case matches the way the variable was defined.
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### Optimization:
+- When deleting multiple/all records, the code is updated to use a batch-based approach to improve efficiency and maintain data consistency.
 
-To log into the Heroku toolbelt CLI:
+## Additional Approaches
+In addition to the SQLAlchemy ORM approach, we have also covered the following ways to interact with the PostgreSQL database:
+- SQL-CRUD: Using raw SQL queries and the psycopg2 library to perform CRUD operations.
+- SQL-Expression: Using the SQLAlchemy Expression Language to write SQL-like queries in Python.
+- SQL-psycopg2: Using the psycopg2 library directly to execute SQL queries, without an ORM.
+Each approach has its own advantages and use cases, and the choice depends on the specific requirements of your project, the complexity of the database schema, and your team's familiarity with the different tools and libraries.
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+## Running the Script
+- Ensure that you have a PostgreSQL database named "chinook" set up and accessible.
+- Run the `sql-crud.py` script using Python:  
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+python3 sql-crud.py
 
----
+This will execute the CRUD operations and display the results in the console.
 
-Happy coding!
+## Conclusion
+This project demonstrates how to use SQLAlchemy's ORM to perform CRUD operations on a PostgreSQL database. It covers various aspects of working with SQLAlchemy, including model definition, querying, updating, and deleting records. The code also includes examples of handling case-sensitivity issues and optimizing the deletion process.

@@ -20,58 +20,69 @@ class Programmer(Base):
 Session = sessionmaker(db)
 session = Session()
 
+# Create the database tables
 Base.metadata.create_all(db)
 
-ada_lovelace = Programmer(
-    first_name="Ada",
-    last_name="Lovelace",
-    gender="F",
-    nationality="British",
-    famous_for="First Programmer"
-)
-
-alan_turing = Programmer(
-    first_name="Alan",
-    last_name="Turing",
+# Add new programmer record for myself
+myself = Programmer(
+    first_name="Yoseph Berhane",
+    last_name="Gebremedhin",
     gender="M",
-    nationality="British",
-    famous_for="Modern Computing"
+    nationality="Swedish",
+    famous_for="Wandering"
 )
 
-grace_hopper = Programmer(
-    first_name="Grace",
-    last_name="Hopper",
-    gender="F",
-    nationality="American",
-    famous_for="COBOL language"
-)
+# Uncomment the following lines to add the previous records
+# ada_lovelace = Programmer(
+#     first_name="Ada",
+#     last_name="Lovelace",
+#     gender="F",
+#     nationality="British",
+#     famous_for="First Programmer"
+# )
+#
+# alan_turing = Programmer(
+#     first_name="Alan",
+#     last_name="Turing",
+#     gender="M",
+#     nationality="British",
+#     famous_for="Modern Computing"
+# )
+#
+# grace_hopper = Programmer(
+#     first_name="Grace",
+#     last_name="Hopper",
+#     gender="F",
+#     nationality="American",
+#     famous_for="COBOL language"
+# )
+#
+# margaret_hamilton = Programmer(
+#     first_name="Margaret",
+#     last_name="Hamilton",
+#     gender="F",
+#     nationality="American",
+#     famous_for="Apollo 11"
+# )
+#
+# bill_gates = Programmer(
+#     first_name="Bill",
+#     last_name="Gates",
+#     gender="M",
+#     nationality="American",
+#     famous_for="Microsoft"
+# )
+#
+# tim_berners_lee = Programmer(
+#     first_name="Tim",
+#     last_name="Berners-Lee",
+#     gender="M",
+#     nationality="British",
+#     famous_for="World Wide Web"
+# )
 
-margaret_hamilton = Programmer(
-    first_name="Margaret",
-    last_name="Hamilton",
-    gender="F",
-    nationality="American",
-    famous_for="Apollo 11"
-)
-
-bill_gates = Programmer(
-    first_name="Bill",
-    last_name="Gates",
-    gender="M",
-    nationality="American",
-    famous_for="Microsoft"
-)
-
-tim_berners_lee = Programmer(
-    first_name="Tim",
-    last_name="Berners-Lee",
-    gender="M",
-    nationality="British",
-    famous_for="World Wide Web"
-)
-
-# Add the programmer instances to the session and commit the changes
-session.add_all([ada_lovelace, alan_turing, grace_hopper, margaret_hamilton, bill_gates, tim_berners_lee])
+# Add the new programmer record to the session and commit the changes
+session.add(myself)
 session.commit()
 
 # Query the Programmer table and print the results

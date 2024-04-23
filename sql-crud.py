@@ -85,6 +85,22 @@ myself = Programmer(
 session.add(myself)
 session.commit()
 
+# Updating a single record
+programmer = session.query(Programmer).filter_by(id=13).first()
+programmer.famous_for = "World President"
+session.commit()
+
+# Updating multiple records
+people = session.query(Programmer)
+for person in people:
+    if person.gender == "F":
+        person.gender = "Female"
+    elif person.gender == "M":
+        person.gender = "Male"
+    else:
+        print("Gender not defined")
+    session.commit()
+
 # Query the Programmer table and print the results
 programmers = session.query(Programmer)
 for programmer in programmers:
